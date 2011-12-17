@@ -65,25 +65,47 @@ if(!window.RaphaelPaint) {
         workspace.onmousedown = this.workspaceOnMouseDown;
         workspace.onmouseup = this.workspaceOnMouseUp;
         workspace.onmousemove = this.workspaceOnMouseMove;
+        workspace.onclick = this.workspaceOnClick;
+        workspace.mouseButton = 0;
+        workspace.mouseMove = false;
         element.appendChild(workspace);
         return workspace;
       },
       workspaceOnMouseDown: function (event) {
-        console.log('down');
+        //registering pressed button
+        if (event.which == 1 && event.button == 0) {
+          this.mouseButton = 1;
+        } else if (event.which == 3 && event.button == 2) {
+          this.mouseButton = 2;
+        }
+
+        this.mouseMove = false;
+        console.log('fire mousedown on tool');
 
         //prevent against drag and drop events
         if (event.preventDefault) {
           event.preventDefault();
         } else {
-          event.returnValue= false;
+          event.returnValue = false;
         }
         return false;
       },
       workspaceOnMouseUp: function (event) {
-        console.log('up');
+        this.mouseButton = 0;
+        console.log('fire mouseup on tool');
       },
       workspaceOnMouseMove: function (event) {
-        //console.log(event.layerX);
+        //console.log(this.mouseButton);
+        if (this.mouseButton > 0) {
+          this.mouseMove = true;
+        }
+        //console.log('fire mousemove on tool');
+      },
+      workspaceOnClick: function (event) {
+        if (this.mouseMove) {
+          return false;
+        }
+        console.log('fire click on tool');
       }
     };
     return RaphaelPaint;
