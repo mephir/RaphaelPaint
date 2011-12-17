@@ -14,3 +14,8 @@
   background: red;
   width: 100px;
 }
+
+._raphael_paint_pen_tool
+{
+  cursor: url("../cursors/pen.cur"), default;
+}

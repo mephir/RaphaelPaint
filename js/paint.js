@@ -29,6 +29,7 @@ if(!window.RaphaelPaint) {
 
         //temporairly because there is one tool ;)
         this.activeTool = this.tools.pen;
+        this.tools.pen.init(this.workspace);
       },
       /**
        * Setup toolbar
@@ -77,7 +78,7 @@ if(!window.RaphaelPaint) {
         element.appendChild(workspace);
         return workspace;
       },
-      workspaceOnMouseDown: function (event) {
+      workspaceOnMouseDown : function (event) {
         //registering pressed button
         if (event.which == 1 && event.button == 0) {
           this.mouseButton = 1;
@@ -96,27 +97,27 @@ if(!window.RaphaelPaint) {
         }
         return false;
       },
-      workspaceOnMouseUp: function (event) {
+      workspaceOnMouseUp : function (event) {
         this.mouseButton = 0;
         RaphaelPaint.fireEvent('onMouseUp', event);
       },
-      workspaceOnMouseMove: function (event) {
+      workspaceOnMouseMove : function (event) {
         if (this.mouseButton > 0) {
           this.mouseMove = true;
         }
         event.mouseButton = this.mouseButton;
         RaphaelPaint.fireEvent('onMouseMove', event);
       },
-      workspaceOnClick: function (event) {
+      workspaceOnClick : function (event) {
         if (this.mouseMove) {
           return false;
         }
         RaphaelPaint.fireEvent('onClick', event);
       },
-      addTool: function (name, obj) {
+      addTool : function (name, obj) {
         this.tools[name] = obj;
       },
-      fireEvent: function (name, event) {
+      fireEvent : function (name, event) {
         if (typeof this.activeTool[name] != "undefined") {
           this.activeTool[name](this.paper, event);
         }

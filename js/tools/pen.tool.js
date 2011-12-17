@@ -5,6 +5,12 @@
     start: { x: 0, y: 0 },
     points: [],
     path: null,
+    workspace: null,
+
+    init: function (workspace) {
+      this.workspace = workspace;
+      this.workspace.addClass('_raphael_paint_pen_tool');
+    },
     onMouseMove: function (paper, event) {
       if (event.mouseButton == 1) {
         if (this.path != null) {
