@@ -1,0 +1,13 @@
+RaphaelPaint by Pawel 'MePhiR' Wilk
+
+== Introduction ==
+Project based on JavaScript svg library Raphael(http://raphaeljs.com/). Project i created for trainee Raphael skills.
+Project is already tested on Firefox,  if i finished base functionality, i will take care about crossbrowser compatybility.
+
+== Requirements ==
+Raphael v. 2+ - http://raphaeljs.com/
+
+== Instalation ==
+
+== License ==
+Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported
