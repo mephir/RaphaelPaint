@@ -7,12 +7,15 @@ if(!window.RaphaelPaint) {
       workspace: null,
       options: null,
       canvas: null,
+      activeTool: null,
+      tools: {},
 
       /**
        * Initializing painter
        */
       init : function (elementId, width, height, options) {
         this.options = options || {};
+        this.options.tools = options.tools || ['pen'];
 
         this.holder = document.getElementById(elementId);
         this.toolbar = this.setupToolbar();
@@ -23,6 +26,9 @@ if(!window.RaphaelPaint) {
         this.holder.addClass('_raphael_paint');
         this.holder.appendChild(this.toolbar);
         this.holder.appendChild(this.canvas);
+
+        //temporairly because there is one tool ;)
+        this.activeTool = this.tools.pen;
       },
       /**
        * Setup toolbar
@@ -80,7 +86,7 @@ if(!window.RaphaelPaint) {
         }
 
         this.mouseMove = false;
-        console.log('fire mousedown on tool');
+        RaphaelPaint.fireEvent('onMouseDown', event);
 
         //prevent against drag and drop events
         if (event.preventDefault) {
@@ -92,20 +98,28 @@ if(!window.RaphaelPaint) {
       },
       workspaceOnMouseUp: function (event) {
         this.mouseButton = 0;
-        console.log('fire mouseup on tool');
+        RaphaelPaint.fireEvent('onMouseUp', event);
       },
       workspaceOnMouseMove: function (event) {
-        //console.log(this.mouseButton);
         if (this.mouseButton > 0) {
           this.mouseMove = true;
         }
-        //console.log('fire mousemove on tool');
+        event.mouseButton = this.mouseButton;
+        RaphaelPaint.fireEvent('onMouseMove', event);
       },
       workspaceOnClick: function (event) {
         if (this.mouseMove) {
           return false;
         }
-        console.log('fire click on tool');
+        RaphaelPaint.fireEvent('onClick', event);
+      },
+      addTool: function (name, obj) {
+        this.tools[name] = obj;
+      },
+      fireEvent: function (name, event) {
+        if (typeof this.activeTool[name] != "undefined") {
+          this.activeTool[name](this.paper, event);
+        }
       }
     };
     return RaphaelPaint;
