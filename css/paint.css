@@ -1,0 +1,16 @@
+._raphael_paint
+{
+  /** some styles **/
+}
+._raphael_paint_canvas
+{
+  background: #fff;
+  float: right;
+}
+
+._raphael_paint_toolbar
+{
+  float: left;
+  background: red;
+  width: 100px;
+}

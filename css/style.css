@@ -12,6 +12,25 @@ label, legend, table, caption, tbody, tfoot, thead, tr, th, td
   background:     transparent;
 }
 
+.clearfix:after {
+  content: ".";
+  clear: both;
+  display: block;
+  height: 0;
+  line-height: 0;
+  visibility: hidden;
+}
+.clearfix {
+  display: inline-block;
+}
+html[xmlns] .clearfix {
+  display: block;
+}
+* html .clearfix {
+  height: 1%;
+}
+
+/**** elements definitions ****/
 body
 {
   text-align:     left;
@@ -35,4 +54,10 @@ body
 {
   font-size: 0.6em;
   font-style: italic;
+}
+
+#container #content
+{
+  width: 900px;
+  margin: 0 auto;
 }
